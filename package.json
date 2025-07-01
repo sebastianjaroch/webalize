@@ -18,20 +18,23 @@
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
   },
   "dependencies": {
-    "@payloadcms/next": "workspace:*",
-    "@payloadcms/payload-cloud": "workspace:*",
-    "@payloadcms/richtext-lexical": "workspace:*",
-    "@payloadcms/ui": "workspace:*",
+    "@faker-js/faker": "^9.8.0",
+    "@payloadcms/db-sqlite": "^3.42.0",
+    "@payloadcms/next": "^3.42.0",
+    "@payloadcms/payload-cloud": "^3.42.0",
+    "@payloadcms/richtext-lexical": "^3.42.0",
+    "@payloadcms/ui": "^3.42.0",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",
     "next": "15.3.2",
-    "payload": "workspace:*",
+    "payload": "^3.42.0",
     "react": "19.1.0",
     "sharp": "0.32.6",
-    "@payloadcms/db-sqlite": "workspace:*"
+    "slug": "^11.0.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
     "@playwright/test": "1.50.0",
     "@testing-library/react": "16.3.0",
     "@types/node": "^22.5.4",

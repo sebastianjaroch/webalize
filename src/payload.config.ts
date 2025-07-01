@@ -1,14 +1,22 @@
-// storage-adapter-import-placeholder
+// payload.config.ts
+import { buildConfig } from 'payload'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import sharp from 'sharp'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { buildConfig } from 'payload'
-import { fileURLToPath } from 'url'
-import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Courses } from './collections/Courses'
+import { Modules } from './collections/Modules'
+import { Documentation } from './collections/Documentation'
+import { DocumentationRequests } from './collections/DocumentationRequests'
+import { Orders } from './collections/Orders'
+import { Cart } from './collections/Cart'
+import { SubscriptionPlans } from './collections/SubscriptionPlans'
+import { Newsletter } from './collections/Newsletter'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,7 +28,18 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [
+    Users,
+    Media,
+    Courses,
+    Modules,
+    Documentation,
+    DocumentationRequests,
+    Orders,
+    Cart,
+    SubscriptionPlans,
+    Newsletter,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -32,8 +51,5 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [
-    payloadCloudPlugin(),
-    // storage-adapter-placeholder
-  ],
+  plugins: [payloadCloudPlugin()],
 })
