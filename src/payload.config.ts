@@ -6,6 +6,7 @@ import sharp from 'sharp'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -41,7 +42,7 @@ export default buildConfig({
     Newsletter,
   ],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: 'a038fc036bbc4417d1057fa5' || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
@@ -49,9 +50,20 @@ export default buildConfig({
     // Postgres-specific arguments go here.
     // `pool` is required.
     pool: {
-      connectionString: process.env.DATABASE_URI,
+      connectionString:
+        'postgres://neondb_owner:npg_qHQWElPY8bZ2@ep-jolly-salad-a2825nwe-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require',
     },
   }),
   sharp,
-  plugins: [payloadCloudPlugin()],
+  plugins: [
+    payloadCloudPlugin(),
+    vercelBlobStorage({
+      enabled: true,
+      collections: {
+        // If you have another collection that supports uploads, you can add it below
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    }),
+  ],
 })
