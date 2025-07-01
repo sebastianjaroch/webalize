@@ -42,7 +42,7 @@ export default buildConfig({
     Newsletter,
   ],
   editor: lexicalEditor(),
-  secret: 'a038fc036bbc4417d1057fa5' || '',
+  secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
@@ -50,8 +50,7 @@ export default buildConfig({
     // Postgres-specific arguments go here.
     // `pool` is required.
     pool: {
-      connectionString:
-        'postgres://neondb_owner:npg_qHQWElPY8bZ2@ep-jolly-salad-a2825nwe-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require',
+      connectionString: process.env.DATABASE_URI,
     },
   }),
   sharp,
